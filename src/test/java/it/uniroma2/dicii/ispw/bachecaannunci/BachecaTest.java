@@ -118,7 +118,7 @@ class BachecaTest {
         DAOFactory.getAdDAO().createAd("Test Ad", 100, "Desc", username, "Test");
         // Recuperiamo l'ID dell'annuncio appena creato (assumendo sia l'ultimo o cercandolo)
         List<AnnuncioBean> ads = DAOFactory.getAdDAO().findAll();
-        int adId = ads.get(ads.size() - 1).getId();
+        int adId = ads.getLast().getId();
 
         // 3. Azione: Aggiungi nota
         String notaText = "Nota personale: il cliente sembra interessato";
@@ -128,6 +128,6 @@ class BachecaTest {
         List<NoteBean> notes = noteController.getNotes(adId);
 
         assertFalse(notes.isEmpty(), "La lista delle note non deve essere vuota");
-        assertEquals(notaText, notes.get(0).getTesto(), "Il testo della nota deve corrispondere");
+        assertEquals(notaText, notes.getFirst().getTesto(), "Il testo della nota deve corrispondere");
     }
 }
