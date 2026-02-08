@@ -52,8 +52,8 @@ public class UserDAOFileSystem implements UserDAO {
     @Override
     public Credentials login(String username, String password) throws DAOException {
         if ("admin".equals(username)) {
-            if ("admin".equals(password)) {
-                return new Credentials("admin", "admin", Role.AMMINISTRATORE);
+            if ("password".equals(password)) {
+                return new Credentials("admin", "password", Role.AMMINISTRATORE);
             } else {
                 return null;
             }
