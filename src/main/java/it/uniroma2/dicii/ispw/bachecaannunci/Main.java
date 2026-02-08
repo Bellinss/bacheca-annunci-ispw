@@ -39,23 +39,19 @@ public class Main extends Application {
 
         switch (persistenceInput.trim()) {
             case "3":
-                // MODIFICA QUI: Usa il Setter
                 Config.setMode(Config.PersistenceMode.MYSQL);
                 System.out.println("   >> Modalità impostata: MySQL");
                 break;
             case "2":
-                // MODIFICA QUI: Usa il Setter
                 Config.setMode(Config.PersistenceMode.FILE_SYSTEM);
                 System.out.println("   >> Modalità impostata: File System");
                 break;
             case "1":
-                // MODIFICA QUI: Usa il Setter
                 Config.setMode(Config.PersistenceMode.IN_MEMORY);
                 System.out.println("   >> Modalità impostata: Demo (In-Memory)");
                 break;
             default:
                 System.out.println("   >> Input non valido. Impostazione di default: Demo (In-Memory)");
-                // MODIFICA QUI: Usa il Setter
                 Config.setMode(Config.PersistenceMode.IN_MEMORY);
                 break;
         }
@@ -70,7 +66,6 @@ public class Main extends Application {
 
         if (viewInput.trim().equals("2")) {
             System.out.println("\n   >> Avvio CLI in corso...\n");
-            // Nota: CLIView userà Config.getMode() internamente per stampare l'intestazione
             new CLIView().run();
         } else if (viewInput.trim().equals("1")) {
             System.out.println("\n   >> Avvio GUI in corso...");

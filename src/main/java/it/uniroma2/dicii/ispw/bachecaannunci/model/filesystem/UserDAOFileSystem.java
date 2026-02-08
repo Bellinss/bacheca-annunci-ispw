@@ -1,7 +1,7 @@
 package it.uniroma2.dicii.ispw.bachecaannunci.model.filesystem;
 
 import it.uniroma2.dicii.ispw.bachecaannunci.exception.DAOException;
-import it.uniroma2.dicii.ispw.bachecaannunci.model.dao.UserDAO; // L'interfaccia creata prima
+import it.uniroma2.dicii.ispw.bachecaannunci.model.dao.UserDAO;
 import it.uniroma2.dicii.ispw.bachecaannunci.model.domain.Credentials;
 import it.uniroma2.dicii.ispw.bachecaannunci.model.domain.Role;
 import it.uniroma2.dicii.ispw.bachecaannunci.model.domain.UserBean;
@@ -17,7 +17,7 @@ public class UserDAOFileSystem implements UserDAO {
     private static final String FILE_NAME = Config.FILE_PATH + "users.ser";
 
     public UserDAOFileSystem() {
-        // Assicura che la cartella demo_data esista
+        // Assicura che la cartella file_data esista
         new File(Config.FILE_PATH).mkdirs();
     }
 
@@ -46,11 +46,19 @@ public class UserDAOFileSystem implements UserDAO {
     }
 
     // --------------------------------------------------------
-    // LOGICA DI LOGIN (Sostituisce LoginProcedureDAO)
+    // LOGICA DI LOGIN
     // --------------------------------------------------------
 
     @Override
     public Credentials login(String username, String password) throws DAOException {
+        if ("admin".equals(username)) {
+            if ("admin".equals(password)) {
+                return new Credentials("admin", "admin", Role.AMMINISTRATORE);
+            } else {
+                return null;
+            }
+        }
+
         // 1. Carica tutti gli utenti dal file
         List<UserBean> users = loadUsers();
 
@@ -59,8 +67,7 @@ public class UserDAOFileSystem implements UserDAO {
             if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
 
                 // Trovato! Restituisci le credenziali.
-                // Nota: Nella demo, assegniamo di default il ruolo UTENTE (o quello salvato se lo gestisci nel bean)
-                // Se il tuo UserBean non ha il campo ruolo, usiamo Role.UTENTE fisso per la demo.
+                // Nota: Nella demo, assegniamo di default il ruolo UTENTE
                 return new Credentials(u.getUsername(), u.getPassword(), Role.UTENTE);
             }
         }
@@ -70,7 +77,7 @@ public class UserDAOFileSystem implements UserDAO {
     }
 
     // --------------------------------------------------------
-    // LOGICA DI REGISTRAZIONE (Sostituisce RegistrationProcedureDAO)
+    // LOGICA DI REGISTRAZIONE
     // --------------------------------------------------------
 
     @Override
