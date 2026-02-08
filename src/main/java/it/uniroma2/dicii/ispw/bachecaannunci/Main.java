@@ -25,7 +25,7 @@ public class Main extends Application {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("******************************************");
-        System.out.println("* BACHECA ANNUNCI - LAUNCHER        *");
+        System.out.println("*      BACHECA ANNUNCI - LAUNCHER        *");
         System.out.println("******************************************");
 
         // --- STEP 1: Scelta Persistenza ---
